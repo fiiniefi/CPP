@@ -1,0 +1,171 @@
+[  5]
+[  7]
+[  9]
+[ 11]
+[ 20]
+[ 72]
+[ 73]
+[ 75]
+[ 87]
+[143]
+[144]
+[146]
+[150]
+[155]
+[159]
+[166]
+[170]                               else 
+[171]                               isMembe
+[ 48]                              0 -> DivZero
+[ 51]                              0 -> DivZero
+[ 49]                              _ -> Itgr (i1 `div` i2)
+[ 52]                              _ -> Itgr (i1 `mod` i2)
+[101]                           UNot -> x
+[102]                           _ -> Err p ("Wrong unary operator applied to bool expression")
+[153]                           else 
+[154]                           valueOf var pairs
+[115]                          BAnd -> x
+[114]                          BOr -> x
+[116]                          _ -> Err p ("Wrong binary operator applied to bool expressions")
+[ 98]                       UNeg -> x
+[ 99]                       _ -> Err p ("Wrong unary operator applied to int expression")
+[ 44]                     BAdd -> Itgr (i1 + i2)
+[124]                     BAdd -> x
+[ 47]                     BDiv -> case i2 of
+[127]                     BDiv -> x
+[ 38]                     BEq -> Bln (i1 == i2)
+[118]                     BEq -> Boolean p
+[ 43]                     BGe -> Bln (i1 >= i2)
+[123]                     BGe -> Boolean p
+[ 41]                     BGt -> Bln (i1 > i2)
+[121]                     BGt -> Boolean p
+[ 42]                     BLe -> Bln (i1 <= i2)
+[122]                     BLe -> Boolean p
+[ 40]                     BLt -> Bln (i1 < i2)
+[120]                     BLt -> Boolean p
+[ 50]                     BMod -> case i2 of
+[128]                     BMod -> x
+[ 46]                     BMul -> Itgr (i1 * i2)
+[126]                     BMul -> x
+[ 39]                     BNeq -> Bln (i1 /= i2)
+[119]                     BNeq -> Boolean p
+[ 45]                     BSub -> Itgr (i1 - i2)
+[125]                     BSub -> x
+[129]                     _ -> Err p ("Wrong binary operator applied to int expressions")
+[ 56]                    BAnd -> Bln (i1 && i2)
+[ 57]                    BOr -> Bln (i1 || i2)
+[162]                 (Boolean _, Boolean _) -> True
+[164]                 (Err _ _, Err _ _) -> True
+[163]                 (Itg _, Itg _) -> True
+[165]                 _ -> False
+[ 55]                Bln i2 -> case op of
+[ 36]                DivZero -> DivZero
+[ 54]                DivZero -> DivZero
+[ 37]                Itgr i2 -> case op of
+[142]               else y
+[100]             Boolean _ -> case op of
+[ 96]             Err p1 message -> Err p1 message
+[ 97]             Itg _ -> case op of
+[ 71]            Bln False -> y
+[ 70]            Bln True -> x
+[ 30]            Bln booln -> Bln (not booln)
+[113]            Boolean p -> case op of
+[ 69]            DivZero -> DivZero
+[ 31]            DivZero -> DivZero
+[117]            Itg p -> case op of
+[ 29]            Itgr itg -> Itgr (-itg)
+[112]            case x of
+[133]            else
+[138]            else
+[107]            else 
+[109]            else 
+[111]            else 
+[110]            if equalTypes x y == False then Err p ("Different types on both sides of binary operator")
+[108]            if equalTypes y (Err p "") then y
+[141]            in if equalTypes y z == False then Err p ("Branches of \"if\" statement have different types")
+[140]            in let z = recTypecheck variables expr3
+[139]            let y = recTypecheck variables expr2
+[134]            recTypecheck ((var, x):variables) expr2
+[ 61]           else 
+[ 63]           in recEval pairsx expr2
+[ 62]           let pairsx = (var, x):pairs
+[ 53]         Bln i1 -> case recEval pairs expr2 of
+[ 34]         DivZero -> DivZero
+[ 35]         Itgr i1 -> case recEval pairs expr2 of
+[ 95]         in case x of
+[137]         in if equalTypes x (Boolean p) == False then Err p ("Condition of \"if\" statement is not a bool") 
+[106]         in if equalTypes x (Err p "") then x
+[132]         in if equalTypes x (Err p "") then x 
+[105]         in let y = recTypecheck variables expr2
+[ 94]         let x = recTypecheck variables expr
+[104]         let x = recTypecheck variables expr1
+[131]         let x = recTypecheck variables expr1
+[136]         let x = recTypecheck variables expr1
+[ 17]        else 
+[ 19]        in Value result
+[ 68]        in case condition of
+[ 28]        in case x of
+[ 60]        in if x == DivZero then DivZero
+[ 66]        in let x = recEval pairs expr2
+[ 67]        in let y = recEval pairs expr3
+[ 18]        let Itgr result = res
+[ 65]        let condition = recEval pairs expr1
+[ 27]        let x = recEval pairs expr
+[ 59]        let x = recEval pairs expr1
+[ 84]       else 
+[ 82]       else 
+[ 83]       if equalTypes programt (Boolean pdat) then Error pdat ("Bool cannot be value of the program")
+[ 86]       in Error pt message
+[ 85]       let Err pt message = programt 
+[ 16]     in if res == DivZero then RuntimeError
+[ 15]     in let res = recEval pairsrt program
+[ 14]     let pairsrt = makeResType pairs
+[ 33]    case recEval pairs expr1 of
+[ 81]    in if equalTypes programt (Itg pdat) then Ok
+[ 79]    in let pairs = makePairs pdat variables
+[ 80]    in let programt = recTypecheck pairs program 
+[ 78]    let pdat = getData program
+[ 88]--przepisanie AST
+[ 21]--przepisanie AST
+[  8]data ResTypes = Bln Bool | Itgr Integer | DivZero deriving(Eq, Show)
+[  6]data Types p = Boolean p | Itg p | Err p String deriving(Eq, Show)
+[160]equalTypes :: Types p -> Types p -> Bool   --sprawdza, czy typy wyrazen sa jednakowe
+[161]equalTypes a b = case (a,b) of
+[ 12]eval :: [(Var,Integer)] -> Expr p -> EvalResult  --z glownego evala wywolam rekurencyjny recEval, ktory pozwala mi na zwrocenie wartosci typu ResTypes
+[ 13]eval pairs program =
+[  3]import AST
+[  4]import DataTypes
+[167]isMember :: p -> Var -> [(Var, Types p)] -> Types p   --sprawdza, czy zmienna do ktorej probujemy sie odwolac zostala zadeklarowana
+[169]isMember p var (x:variables) = if var == fst x then snd x 
+[168]isMember p var [] = Err p ("Variable \"" ++ var ++ "\" has not been declared")
+[156]makePairs :: p -> [Var] -> [(Var, Types p)]   --z listy zmiennych tworzy liste par (zmienna, typ). robi same integery, bo to lista wejsciowa
+[158]makePairs p (var:variables) = (var, Itg p):makePairs p variables
+[157]makePairs p [] = []
+[149]makeResType ((var, value):pairs) = (var, Itgr value):makeResType pairs    
+[147]makeResType :: [(Var, Integer)] -> [(Var, ResTypes)]   --zamienia w parach typ Integer na ResTypes
+[148]makeResType [] = []
+[  2]module MarcinDrewniak (typecheck, eval) where
+[ 22]recEval :: [(Var, ResTypes)] -> Expr p -> ResTypes
+[ 25]recEval _ (EBool _ booln) = Bln booln
+[ 24]recEval _ (ENum _ itg) = Itgr itg
+[ 32]recEval pairs (EBinary _ op expr1 expr2) = 
+[ 64]recEval pairs (EIf _ expr1 expr2 expr3) = 
+[ 58]recEval pairs (ELet _ var expr1 expr2) = 
+[ 26]recEval pairs (EUnary _ op expr) = 
+[ 23]recEval pairs (EVar _ var) = valueOf var pairs
+[ 89]recTypecheck :: [(Var, Types p)] -> Expr p -> Types p
+[ 92]recTypecheck _ (EBool p _) = Boolean p
+[ 91]recTypecheck _ (ENum p _) = Itg p
+[103]recTypecheck variables (EBinary p op expr1 expr2) =
+[135]recTypecheck variables (EIf p expr1 expr2 expr3) = 
+[130]recTypecheck variables (ELet p var expr1 expr2) = 
+[ 93]recTypecheck variables (EUnary p op expr) = 
+[ 90]recTypecheck variables (EVar p var) = isMember p var variables
+[ 76]typecheck :: [Var] -> Expr p -> TypeCheckResult p   --z glownego typechecka wywolam recTypecheck ktory pozwoli mi na zwrocenie wartosci typu Types
+[ 77]typecheck variables program = 
+[151]valueOf :: Var -> [(Var, ResTypes)] -> ResTypes   --wyznacza wartosc zmiennej
+[152]valueOf var (pair:pairs) = if var == (fst pair) then (snd pair)
+[  1]{-# LANGUAGE Safe #-}
+[ 10]{-*********EVAL********-}
+[145]{-*********FUNKCJE POMOCNICZE********-}
+[ 74]{-********TYPECHECK*********-}
